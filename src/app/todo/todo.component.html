@@ -1,0 +1,9 @@
+<h2>ToDo lista</h2>
+<ul>
+  <li *ngFor="let item of lista">{{item}}</li>
+
+</ul>
+<div >
+  <input class="formControl" [(ngModel)]="inputTekst">
+  <button (click)="addToDo()" class="btn btn-success">Dodaj</button>
+</div>
