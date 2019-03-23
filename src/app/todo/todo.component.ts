@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 interface elementToDo {
   nazwa: string;
@@ -7,27 +7,50 @@ interface elementToDo {
 }
 
 @Component({
-  selector: 'app-todo',
-  templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.less']
+  selector: "app-todo",
+  templateUrl: "./todo.component.html",
+  styleUrls: ["./todo.component.less"]
 })
 export class TodoComponent implements OnInit {
+  lista: Array<elementToDo> = [];
+  listaDoWykonania: Array<elementToDo>;
 
-  lista = [];
   inputTekst: string;
+  wyszukaj: string = "";
 
-  addToDo()
-  {
-     this.lista.push(this.inputTekst);
-
-     this.lista = this.lista.filter(e => e != 'aa');
-
-     this.inputTekst  = '';
+  addToDo() {
+    let nowyelement: elementToDo = {
+      nazwa: this.inputTekst,
+      wykonane: false,
+      kiedyWykonane: null
+    };
+    this.lista.push(nowyelement);
+    this.inputTekst = '';
+    this.szukaj(this.wyszukaj);
   }
 
-  constructor() { }
+  szukaj(coSzukac: string) {
+    if (coSzukac && coSzukac == '')
+      this.listaDoWykonania = this.lista.filter(e => !e.wykonane);
+    else
+      this.listaDoWykonania = this.lista.filter(
+        e =>
+          e.nazwa
+            .toLowerCase()
+            .trim()
+            .includes(coSzukac.toLowerCase()) && !e.wykonane
+      );
+  }
+
+  usun(item) {
+    this.lista = this.lista.filter(e => e != item);
+    this.szukaj(this.wyszukaj);
+  }
+
+  constructor() {}
 
   ngOnInit() {
-  }
+    this.szukaj(this.wyszukaj);
 
+  }
 }

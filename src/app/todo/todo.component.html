@@ -1,9 +1,13 @@
 <h2>ToDo lista</h2>
 <ul>
-  <li *ngFor="let item of lista">{{item}}</li>
+  <li *ngFor="let item of listaDoWykonania">{{item.nazwa}} <span (click)="usun(item)"  class="btn btn-danger">X</span> </li>
 
 </ul>
 <div >
   <input class="formControl" [(ngModel)]="inputTekst">
   <button (click)="addToDo()" class="btn btn-success">Dodaj</button>
+</div>
+
+<div>
+    <input class="formControl" [(ngModel)]="wyszukaj" (keyup)="szukaj(wyszukaj)" >
 </div>
