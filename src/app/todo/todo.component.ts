@@ -47,6 +47,12 @@ export class TodoComponent implements OnInit {
     this.szukaj(this.wyszukaj);
   }
 
+  wykonane(item: elementToDo) {
+    item.wykonane = true;
+    item.kiedyWykonane = new Date();
+    this.szukaj(this.wyszukaj);
+  }
+
   constructor() {}
 
   ngOnInit() {
